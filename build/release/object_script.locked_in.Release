@@ -1,0 +1,11 @@
+release/RegistryBlocker.o
+release/gamestate.o
+release/helpers.o
+release/main.o
+release/mainwindow.o
+release/skill.o
+release/statstab.o
+release/qrc_icons.o
+release/qrc_styles.o
+release/moc_mainwindow.o
+release/moc_statstab.o

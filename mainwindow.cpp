@@ -28,13 +28,8 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     ui->tabWidget->setTabText(0, tr("Skills"));
-
     ui->tabWidget->setTabText(1, tr("Apps to Block"));
-
-    // rename tab at index 1
     ui->tabWidget->setTabText(2, tr("Network Block"));
-
-    // rename tab at index 2
     ui->tabWidget->setTabText(3, tr("Controls"));
 
     ui->durationSpinBox->setMinimum(1);
@@ -55,7 +50,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->saveButton, &QPushButton::clicked, this, &MainWindow::handleSave);
     connect(ui->loadButton, &QPushButton::clicked, this, &MainWindow::handleLoad);
 
-    // handle list deletes
     connect(ui->appListWidget, &QListWidget::itemDoubleClicked, this, [=]() {
         QList<QListWidgetItem*> selected = ui->appListWidget->selectedItems();
         for (QListWidgetItem* item : selected) {
@@ -73,6 +67,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    this->gameState.saveToDisk();
     delete ui;
 }
 
@@ -254,8 +249,6 @@ void MainWindow::handleAdddnsButton() {
 }
 
 void MainWindow::handleBlockAllButton() {
-
-    // TODO check that a skill is chosen!
     if (ui->statsTab->currentSkill().isEmpty()) {
         QMessageBox::warning(this, "Select Skill", "Please select a skill to train before blocking.");
         return;
@@ -268,21 +261,9 @@ void MainWindow::handleBlockAllButton() {
     QStringList hosts;
     for (int i = 0; i < ui->dnsListWidget->count(); ++i)
         hosts << ui->dnsListWidget->item(i)->text();
-    int seconds = ui->durationSpinBox->value();
-
-    // QString hostsBackup = QDir::temp().filePath("hosts_backup");
-    // backupHosts(hostsBackup);
+    int seconds = ui->durationSpinBox->value() * 60;
     std::wstring regOut = QDir::temp().filePath("iefo_backup.reg").toStdWString();
     BackupRegistry(regOut);
-
-    // std::thread([files, hosts, seconds, this, hostsBackup]() {
-    //     for (const QString &f : files) { bool ok = BlockApp(f.toStdWString()); qDebug() << "Blocking" << f << (ok ? "succeeded" : "failed"); };
-    //     applyHostsBlock(hosts);
-    //     std::this_thread::sleep_for(std::chrono::seconds(seconds));
-    //     for (const QString &f : files) UnblockApp(f.toStdWString());
-    //     restoreHosts(hostsBackup);
-    //     showMessage(tr("Info"), tr("Timed block complete."));
-    // }).detach();
 
     std::thread([=]() {
         setUIControls(false);
@@ -295,7 +276,7 @@ void MainWindow::handleBlockAllButton() {
             bool ok = BlockApp(f.toStdWString());
             qDebug() << "Blocking" << f << (ok ? "succeeded" : "failed");
         }
-        //applyHostsBlock(hosts);
+
         if (!isWindowsFirewallEnabled()) {
             QMessageBox::warning(this,
                 QObject::tr("Firewall Disabled"),
@@ -310,7 +291,7 @@ void MainWindow::handleBlockAllButton() {
             bool ok = UnblockApp(f.toStdWString());
             qDebug() << "Unblocking" << f << (ok ? "succeeded" : "failed");
         }
-        //restoreHosts(hostsBackup);
+
         removeFirewallBlockRules(hosts);
 
         QMetaObject::invokeMethod(QApplication::instance(), [=]() {
@@ -346,31 +327,16 @@ void MainWindow::handleUnblockAllButton() {
 }
 
 void MainWindow::handleBackupButton() {
-    // hosted
-    // QString hostsOut = QDir::temp().filePath("hosts_backup");
-    //bool okHosts = backupHosts(hostsOut);
     std::wstring regOut = QDir::temp().filePath("iefo_backup.reg").toStdWString();
     bool okReg = BackupRegistry(regOut);
     showMessage(tr("Backup"), tr("Registry: %1").arg(okReg ? tr("OK") : tr("Fail")));
-    // showMessage(tr("Backup"),
-    //             tr("Hosts: %1; Registry: %2")
-    //                 .arg(okHosts ? tr("OK") : tr("Fail"))
-    //                 .arg(okReg ? tr("OK") : tr("Fail")),
-    //             !(okHosts && okReg));
 }
 
 void MainWindow::handleRestoreButton() {
-    // QString hostsIn = QDir::temp().filePath("hosts_backup");
-    //bool okHosts = restoreHosts(hostsIn);
     std::wstring regIn = QDir::temp().filePath("iefo_backup.reg").toStdWString();
     int code = RestoreRegistry(regIn);
     bool okReg = (code == 0);
     showMessage(tr("Restore"), tr("Registry: %1").arg(okReg ? tr("OK") : tr("Fail")));
-    // showMessage(tr("Restore"),
-    //             tr("Hosts: %1; Registry: %2")
-    //                 .arg(okHosts ? tr("OK") : tr("Fail"))
-    //                 .arg(okReg ? tr("OK") : tr("Fail")),
-    //             !(okHosts && okReg));
 }
 
 

@@ -11,6 +11,11 @@ public:
 
     Skill(QString name);
 
+    inline Skill(QString name, int currentXp, int levelBreakpoint, int level) :
+        _name(name), _currentXp(currentXp), _levelBreakpoint(levelBreakpoint), _level(level) {
+        _iconPath = ":/icons/icons/" + name + "_icon.png";
+    };
+
     void levelUp();
 
     void addXp(int xp);
@@ -21,6 +26,10 @@ public:
 
     inline int getCurrent() const {
         return _currentXp;
+    }
+
+    inline int getLevel() const {
+        return _level;
     }
 
     QString _iconPath;

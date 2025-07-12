@@ -19,6 +19,7 @@ public:
 
     inline void setActiveSkill(const QString& skillName) {
         _activeSkill = skillName;
+        saveToDisk();
     }
 
     inline const Skill &getActiveSkill() {
@@ -29,11 +30,16 @@ public:
         return _skills;
     }
 
+    void saveToDisk();
+    bool loadFromDisk();
+
 private:
     QMap<QString, Skill> _skills;
     QString _activeSkill;
     bool _lockedInActive = false;
     QElapsedTimer _lockTimer;
+
+    QString saveFilePath() const;
 };
 
 #endif // GAMESTATE_H

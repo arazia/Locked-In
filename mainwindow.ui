@@ -147,6 +147,9 @@
         <pointsize>18</pointsize>
        </font>
       </property>
+      <property name="maximum">
+       <number>9999</number>
+      </property>
      </widget>
      <widget class="QWidget" name="gridLayoutWidget">
       <property name="geometry">
@@ -255,7 +258,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Time (Seconds)</string>
+       <string>Time (Minutes)</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_4">

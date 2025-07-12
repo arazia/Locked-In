@@ -41,6 +41,11 @@ void StatsTab::loadSetup(const QMap<QString, Skill>& skills) {
         });
         skillButtons[name] = nameButton;
 
+        QLabel* levelLabel = new QLabel(QString("Level %1").arg(skill.getLevel()));
+        levelLabel->setAlignment(Qt::AlignCenter);
+        QFont lvlFont = levelLabel->font();
+        lvlFont.setItalic(true);
+        levelLabel->setFont(lvlFont);
 
 
         // TODO fix later
@@ -56,6 +61,7 @@ void StatsTab::loadSetup(const QMap<QString, Skill>& skills) {
 
         // Add to layout
         this->layout->addWidget(nameButton);
+        this->layout->addWidget(levelLabel);
         this->layout->addWidget(iconLabel);
         this->layout->addWidget(xpBar);
     }

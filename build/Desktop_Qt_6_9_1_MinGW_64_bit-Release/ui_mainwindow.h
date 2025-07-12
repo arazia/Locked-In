@@ -145,6 +145,7 @@ public:
         QFont font1;
         font1.setPointSize(18);
         durationSpinBox->setFont(font1);
+        durationSpinBox->setMaximum(9999);
         gridLayoutWidget = new QWidget(startTab);
         gridLayoutWidget->setObjectName("gridLayoutWidget");
         gridLayoutWidget->setGeometry(QRect(20, 380, 881, 151));
@@ -240,7 +241,7 @@ public:
         unblockAllButton->setText(QCoreApplication::translate("MainWindow", "Unblock All", nullptr));
         backupButton->setText(QCoreApplication::translate("MainWindow", "Backup", nullptr));
         restoreButton->setText(QCoreApplication::translate("MainWindow", "Restore", nullptr));
-        label_3->setText(QCoreApplication::translate("MainWindow", "Time (Seconds)", nullptr));
+        label_3->setText(QCoreApplication::translate("MainWindow", "Time (Minutes)", nullptr));
         label_4->setText(QString());
         tabWidget->setTabText(tabWidget->indexOf(startTab), QCoreApplication::translate("MainWindow", "Tab 2", nullptr));
     } // retranslateUi

@@ -2,7 +2,7 @@ QT       += core gui widgets network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-CONFIG += c++17 console
+CONFIG += c++17
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -36,10 +36,10 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 # win32:QMAKE_LFLAGS += -shared
 
-win32 {
-  CONFIG += embed_manifest_exe
-  QMAKE_LFLAGS_WINDOWS += /MANIFESTUAC:"level='requireAdministrator'"
-}
+# win32 {
+#   CONFIG += embed_manifest_exe
+#   QMAKE_LFLAGS_WINDOWS += /MANIFESTUAC:"level='requireAdministrator'"
+# }
 
 RESOURCES += \
     icons.qrc \

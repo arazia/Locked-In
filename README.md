@@ -63,8 +63,6 @@ a desktop application can clear the DNS cache of your browser, maybe I could've 
 folder somewhere.
 
 ## TODOS
-- SAVE FILE FOR YOUR XP AND STUFF
-- ADD LEVELS TO UI
 - Prestige Level 100?
 
 
