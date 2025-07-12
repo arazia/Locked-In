@@ -63,6 +63,10 @@ whenever I cleared the DNS cache of your computer, and when I manually cleared t
 a desktop application can clear the DNS cache of your browser, maybe I could've scrounged around and deleted some files in an unknown
 folder somewhere.
 
+## Installation
+1. Install a release, extract Deployment and run locked_in.exe
+2. Build it yourself using [Qt](https://doc.qt.io/qt-6/get-and-install-qt.html)
+
 ## TODOS
 - Prestige Level 100?
 
