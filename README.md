@@ -12,6 +12,7 @@ Locked In is an app that allows you to block apps and websites, and focus for ho
 - A backup and loading function (in case this bricks your windows system)
 - File browsing and removal.
 - A real passion for UI design.
+- Automatic save and load of your game progress.
 
 ## Requirements
 - Windows (I'm sorry Mac/Linux users)
