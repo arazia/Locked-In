@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>styles/ElegantDark.qss</file>
+        <file>styles/aqua.qss</file>
+    </qresource>
+</RCC>

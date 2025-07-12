@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>icons/Firemaking_icon.png</file>
+        <file>icons/Fishing_icon.png</file>
+        <file>icons/Mining_icon.png</file>
+        <file>icons/Woodcutting_icon.png</file>
+        <file>icons/locked_in.png</file>
+    </qresource>
+</RCC>
